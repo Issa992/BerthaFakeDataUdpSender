@@ -14,6 +14,7 @@ namespace BerthaFakeDataUdpSender
         static void Main(string[] args)
         {
             Console.WriteLine("Enter -T- for temp Data, -H- for health data or stop \r\n");
+
             string option = Console.ReadLine();
 
             try
@@ -25,7 +26,7 @@ namespace BerthaFakeDataUdpSender
                         switch (option.ToUpper())
                         {
                             case "T":
-                                Temp().GetAwaiter().GetResult();
+                                temperature().GetAwaiter().GetResult();
                                 break;
                             case "H":
                                 health().GetAwaiter().GetResult();
@@ -44,12 +45,12 @@ namespace BerthaFakeDataUdpSender
         }
 
 
-        static async Task Temp()
+        static async Task temperature()
         {
             UdpClient udpServer = new UdpClient(0);
             udpServer.EnableBroadcast = true;
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, 9000);
-            Console.WriteLine("Broadcast ready. Get started Press Enter");
+            Console.WriteLine("Broadcast for environment ready. Get started Press Enter");
             Console.ReadLine();
 
             int number = 1;
@@ -58,10 +59,16 @@ namespace BerthaFakeDataUdpSender
             decimal Humidity = 3;
             decimal Temperature = 5;
             string Location = "Cph";
+            Random rnhumidity=new Random();
+            Random rntemperature=new Random();
 
 
             while (true)
             {
+                Humidity = (decimal) (1 + rnhumidity.Next(1, 50) );
+                Temperature = (decimal) (2+ rntemperature.Next(1, 70));
+                Console.WriteLine("hum::::"+Humidity+"\r\n Temp::"+Temperature);
+
                 DateTime currentTime = DateTime.Now;
                 string timeTxt = "Time: " + currentTime + "\n";
                 string data = "UserId " + UserId + "\n" + "Humidity " + Humidity + "\n" + "Temperature " + Temperature + "\n" + "Location " + Location + "\n";
@@ -77,13 +84,13 @@ namespace BerthaFakeDataUdpSender
                 }
 
                 Console.WriteLine("New Data has been sent " + number++);
-                Thread.Sleep(1000);
+                Thread.Sleep(10000);
             }
 
         }
 
 
-        static async Task health()
+        static  async  Task health()
         {
             int number = 1;
             UdpClient udpServer = new UdpClient(0);
@@ -97,10 +104,18 @@ namespace BerthaFakeDataUdpSender
             int HeartBeat = 5;
             int Age = 22;
             int weight = 70;
-            
+
+            Random rnbloodpressure = new Random();
+            Random rnheartbeat = new Random();
+
 
             while (true)
             {
+                BloodPressure = 3 + rnbloodpressure.Next(1, 50);
+                HeartBeat= 5 + rnheartbeat.Next(1, 70);
+
+                Console.WriteLine(BloodPressure+"...."+HeartBeat);
+
                 DateTime currentTime = DateTime.Now;
                 string timeTxt = "Time: " + currentTime + "\n";
                 string data = "UserId " + UserId + "\n" + "BloodPressure " + BloodPressure + "\n" + "HeartBeat " + HeartBeat + "\n" + "Age " + Age + "\n" + "weight " + weight + "\n";
