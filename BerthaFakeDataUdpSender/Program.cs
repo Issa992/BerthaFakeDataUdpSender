@@ -56,8 +56,8 @@ namespace BerthaFakeDataUdpSender
             int number = 1;
 
             int UserId = 93;
-            decimal Humidity = 3;
-            decimal Temperature = 5;
+            decimal Humidity = (decimal) 0.20;
+            decimal Temperature = (decimal) 0.30;
             string Location = "Cph";
             Random rnhumidity=new Random();
             Random rntemperature=new Random();
@@ -65,8 +65,8 @@ namespace BerthaFakeDataUdpSender
 
             while (true)
             {
-                Humidity = (decimal) (1 + rnhumidity.Next(1, 50) );
-                Temperature = (decimal) (2+ rntemperature.Next(1, 70));
+                Humidity = (decimal) (0.20 + rnhumidity.Next(1, 50) );
+                Temperature = (decimal) (0.30+ rntemperature.Next(1, 70));
                 Console.WriteLine("hum::::"+Humidity+"\r\n Temp::"+Temperature);
 
                 DateTime currentTime = DateTime.Now;
@@ -100,8 +100,8 @@ namespace BerthaFakeDataUdpSender
             Console.ReadLine();
 
             int UserId = 90;
-            int BloodPressure = 3;
-            int HeartBeat = 5;
+            int BloodPressure = 2;
+            int HeartBeat = 4;
             int Age = 22;
             int weight = 70;
 
